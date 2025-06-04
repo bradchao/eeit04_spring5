@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -51,6 +53,7 @@ public class Profile {
 	//---------------------
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id")
+	@JsonBackReference
 	private Member member;
 
 	public Member getMember() {

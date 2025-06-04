@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,16 +33,36 @@ public class MemberProfileController {
 		m.setEmail((String)data.get("email"));
 		m.setPasswd((String)data.get("passwd"));
 		
+		Profile p = null;
 		Map<String,Object> proData = (Map<String,Object>)(data.get("profile"));
-		Profile p = new Profile();
-		p.setCname((String)proData.get("cname"));
-		p.setAge((Integer)proData.get("age"));
-		
-		m.setProfile(p);
+		if (proData != null) {
+			p = new Profile();
+			p.setCname((String)proData.get("cname"));
+			p.setAge((Integer)proData.get("age"));
+			
+			m.setProfile(p);
+		}
 		
 		Member saveMember = service.save(m, p);
 		
 		return ResponseEntity.ok(saveMember);
+	}
+	
+	@RequestMapping("/member/{id}/profile")
+	public ResponseEntity<Profile> addProfile(
+			@PathVariable Long id,
+			@RequestBody Map<String,Object> data
+			){
+		
+		Map<String,Object> proData = (Map<String,Object>)data;
+		Profile p = new Profile();
+		p.setCname((String)proData.get("cname"));
+		p.setAge((Integer)proData.get("age"));	
+		
+		Profile profile = service.setProfileToMember(id, p);
+		
+		
+		return ResponseEntity.ok(profile);
 	}
 	
 	
