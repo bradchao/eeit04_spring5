@@ -33,7 +33,7 @@ public class Customer {
 		return companyName;
 	}
 
-	public void setCompanyName(String companyName) {
+	public void setCompanyname(String companyName) {
 		this.companyName = companyName;
 	}
 	
