@@ -34,5 +34,10 @@ public class MemberProfileService {
 		}
 	}
 	
+	public Member findMemberById(Long memberId) {
+		return memberRepository.findById(memberId).orElse(null);
+	}
+	
+	
 	
 }
