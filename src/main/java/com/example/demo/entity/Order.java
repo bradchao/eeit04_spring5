@@ -50,6 +50,22 @@ public class Order {
 		this.customer = customer;
 	}
 	
+	//---------------
+	@ManyToOne
+	@JoinColumn(name = "EmployeeID")
+	@JsonBackReference
+	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
+	
+	
 	
 	
 	
