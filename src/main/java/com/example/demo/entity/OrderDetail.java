@@ -36,6 +36,12 @@ public class OrderDetail {
 	@JsonBackReference
 	private Order order;
 
+	//-----------
+	@ManyToOne
+	@JoinColumn(name = "ProductID")
+	private Product product;
+	
+	
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -74,6 +80,14 @@ public class OrderDetail {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 	
