@@ -17,11 +17,17 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepository respository;
 	
-	@GetMapping("/customer/{id}")
+	@GetMapping("/v1/customer/{id}")
 	public ResponseEntity<Customer> test1(@PathVariable String id){
 		return ResponseEntity.ok(respository.findById(id).orElse(null));
 	}
 	
+	@GetMapping("/v2/customer/{id}")
+	public ResponseEntity<Customer> test2(@PathVariable String id){
+		Customer c = 
+			respository.findByCustomerIdWithOrders(id).orElse(null);
+		return ResponseEntity.ok(c);
+	}
 	
 	
 	
