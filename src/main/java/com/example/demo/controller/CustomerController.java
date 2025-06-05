@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDto;
+import com.example.demo.dto.OrderDetailDto;
 import com.example.demo.dto.OrderDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderDetail;
 import com.example.demo.repository.CustomerRepository;
 
 @RestController
@@ -42,7 +44,21 @@ public class CustomerController {
 		ArrayList<OrderDto> oDto = new ArrayList<>();
 		List<Order> orders = c.getOrders();
 		for (Order order: orders) {
-			OrderDto dto = new OrderDto(order.getOrderid(), order.getOrderdate());
+			ArrayList<OrderDetailDto> dDto = new ArrayList<>();
+			for (OrderDetail detail: order.getOrderDetails()) {
+				OrderDetailDto dto = new OrderDetailDto(
+						detail.getUnitPrice(),
+						detail.getQuantity(),
+						detail.getProduct().getProductName()
+						); 
+				dDto.add(dto);
+			}
+			
+			OrderDto dto = new OrderDto(
+					order.getOrderid(), 
+					order.getOrderdate(),
+					dDto
+					);
 			oDto.add(dto);
 		}
 		
