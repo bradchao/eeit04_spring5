@@ -11,7 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 public class JwtTool {
-	private static final long EXP_TIME = 30 * 1000;
+	private static final long EXP_TIME = 3 * 60 * 1000;
 	private static final String SECURET = "BradChao1966DogCat12345677654321";
 	private static final Key key = Keys.hmacShaKeyFor(SECURET.getBytes()); 
 
