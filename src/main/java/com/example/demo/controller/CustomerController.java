@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDto;
@@ -27,6 +28,7 @@ public class CustomerController {
 	
 	@GetMapping("/v1/customer/{id}")
 	public ResponseEntity<Customer> test1(@PathVariable String id){
+		
 		return ResponseEntity.ok(respository.findById(id).orElse(null));
 	}
 	
@@ -71,6 +73,11 @@ public class CustomerController {
 		return ResponseEntity.ok(cDto);
 	}
 
+	@RequestMapping("/m1")
+	public void m1(@RequestParam String account, @RequestParam String cname) {
+		System.out.printf("%s : %s\n", account, cname);
+	}
+	
 	
 	
 }
