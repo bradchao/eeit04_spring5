@@ -4,6 +4,8 @@ import java.security.Key;
 import java.security.Signature;
 import java.util.Date;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -23,5 +25,17 @@ public class JwtTool {
 			
 		return token;
 	}
+	
+	public static String parseToken(String token) {
+		Key sKey = Keys.hmacShaKeyFor(SECURET.getBytes());
+		JwtParser parser = Jwts.parserBuilder().setSigningKey(sKey).build();
+		
+		Claims claims = parser.parseClaimsJws(token).getBody();
+		String email = claims.getSubject();
+		
+		return email;
+	}
+	
+	
 	
 }
