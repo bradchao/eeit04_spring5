@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.security.CheckJwt;
 import com.example.demo.util.JwtTool;
 
 @RestController
@@ -31,11 +32,13 @@ public class TestController {
 		return JwtTool.createToken(email);
 	}
 	
+	@CheckJwt
 	@GetMapping("/member/m1")
 	public String getMemberData1() {
 		return "很重要的資料1";
 	}
 	
+	@CheckJwt
 	@GetMapping("/member/m2")
 	public String getMemberData2() {
 		return "很重要的資料2";
